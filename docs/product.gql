@@ -1,0 +1,12 @@
+mutation CREATE_PRODUCT($input: ProductInput) {
+  createProduct(input: $input) {
+    name,
+    price,
+    screen {
+      panel,
+      size,
+      resolution
+    }
+  }
+}
+
