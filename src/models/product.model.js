@@ -2,15 +2,14 @@ module.exports = function(mongoose) {
     // Create product schema
     const Schema = mongoose.Schema;
     const ProductSchema = new Schema({
+        id: String,
         name: String,
         slug: String,
         price: Number,
-        colors: {
+        colors: [{
             color: String,
-            images: Array,
-            quantity: Number,
-            sold: Number,
-        },
+            images: [{ type: Schema.Types.ObjectId, ref: 'Image' }],
+        }],
         rating: {
             stars: Number,
             votes: Number
@@ -30,7 +29,9 @@ module.exports = function(mongoose) {
             panel: String,
             resolution: String,
             size: Number,
-        }
+        },
+        cpu: String,
+        gpu: String,
     });
 
     // Create product model

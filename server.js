@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
+const { graphqlUploadExpress }  = require('graphql-upload');
 const database = require('./src/models');
 const typeDefs = require('./src/graphql/typeDefs');
 const resolvers = require('./src/graphql/resolvers');
@@ -27,6 +28,9 @@ app.use(express.urlencoded({ extended: true }));
 // Add logger to server
 app.use(morgan('dev'));
 
+// Use GraphQL Upload Express middleware
+app.use(graphqlUploadExpress());
+
 // Connect to database
 database.mongoose
     .connect(database.url, {
@@ -42,17 +46,15 @@ database.mongoose
     })
 
 
-// Get models
-const { Product } = database;
-
 
 // Create apollo, then apply it to express server
 const server = new ApolloServer({
     typeDefs, 
     resolvers,
     context: {
-        Product
+        ...database
     },
+    uploads: false
 });
 server.start();
 server.applyMiddleware({ app });

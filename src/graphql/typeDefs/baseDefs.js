@@ -4,5 +4,5 @@ module.exports = gql`
     type Message {
         statusCode: Int!,
         message: String!,
-    }
+    },
 `

@@ -1,7 +1,7 @@
 {
   "name": "ec-backend",
   "version": "1.0.0",
-  "description": "e-commerce api, nodejs, express, apollo, graqhql",
+  "description": "e-commerce api, nodejs, express, apollo, graphql",
   "main": "server.js",
   "author": "Tuan Phuong",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "graphql": "^15.5.1",
+    "graphql-upload": "^12.0.0",
     "mongoose": "^5.12.15",
     "morgan": "^1.10.0",
     "slugify": "^1.5.3"

@@ -10,3 +10,25 @@ mutation CREATE_PRODUCT($input: ProductInput) {
   }
 }
 
+# Write your query or mutation here
+mutation($id: ID!, $editContent: EditProductInput!) {
+  editProductById(id: $id, editContent: $editContent) {
+    name
+  }
+}
+
+ mutation($id: ID!) {
+  deleteProductById(id: $id) {
+    name,
+    memory {
+      ram
+    }
+  }
+}
+
+query {
+  products {
+    id,
+    name
+  }
+}

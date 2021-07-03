@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express');
 module.exports = gql`
     input ColorInput {
         color: String!,
-        images: String!,
+        images: [ID]!,
     },
 
     input RatingInput {
@@ -30,7 +30,7 @@ module.exports = gql`
         size: Float!
     },
 
-    input ProductInput {
+    input CreateProductInput {
         name: String!,
         slug: String,
         price: Int!,
@@ -38,14 +38,27 @@ module.exports = gql`
         rating: RatingInput!,
         memory: MemoryInput!,
         dimensions: DimensionsInput!,
-        screen: ScreenInput!
+        screen: ScreenInput!,
+        cpu: String!,
+        gpu: String!
+    },
+
+    input EditProductInput {
+        name: String,
+        slug: String,
+        price: Int,
+        colors: [ColorInput],
+        rating: RatingInput,
+        memory: MemoryInput,
+        dimensions: DimensionsInput,
+        screen: ScreenInput,
+        cpu: String,
+        gpu: String
     },
 
     type Color {
         color: String!,
-        images: [String]!
-        quantity: Int!,
-        sold: Int!
+        images: [Image]!
     },
 
     type Rating {
@@ -73,6 +86,7 @@ module.exports = gql`
     },
 
     type Product {
+        id: ID!,
         name: String!,
         slug: String,
         price: Int!,
@@ -80,7 +94,9 @@ module.exports = gql`
         rating: Rating!,
         memory: Memory!,
         dimensions: Dimensions!,
-        screen: Screen!
+        screen: Screen!,
+        cpu: String!,
+        gpu: String!
     },
 
     type Query {
@@ -89,6 +105,8 @@ module.exports = gql`
     },
 
     type Mutation {
-        createProduct(input: ProductInput): Product!,
+        createProduct(input: CreateProductInput): Product!,
+        editProductById(id: ID!, editContent: EditProductInput!): Product!,
+        deleteProductById(id: ID!): Product!,
     }
 `
